@@ -1,0 +1,21 @@
+Components of Dash_Master code
+
+	CAN
+		RPM TEMP
+	Proximity Sensor	
+	Gear
+
+	SD card
+	NEXTION HMI display
+	NEOPIXLE
+	//lora
+	
+	Misc
+		Toggle Switches
+		
+Libraries Used
+	CAN.h
+	SD.h
+	SPI.h
+
+	

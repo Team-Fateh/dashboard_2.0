@@ -1,0 +1,50 @@
+Components of The Dashboard_2.0 consists
+
+ON PCB
+1	Arduino Mega
+1	Arduino nano
+1	Can bus module
+1	Buck converter
+
+ON DASH
+1	Nextion HMI touch Display
+1	crank push button
+1	kill switch
+3	toggle switch
+1	SD card module
+1	Neopixle LED
+1	USB B port
+
+Wires incoming to Central DAQ Unit
+
+	for Power
+		+12v
+		GND chassis
+	for gear
+		analog read
+	for CAN
+		can High 
+		can LOW
+	for Proximity sensor
+		+12v
+		GND
+		Signal
+	for SD
+		SPI pins
+	for LORA
+		+5v
+		Rx
+		Tx
+	
+	
+DATA to display
+	Battery Voltage
+	TPS
+	Coolant Temp
+	Air Temp
+	RPM
+	Speed
+	Gear
+
+APIs to make
+	

@@ -14,7 +14,7 @@ float TEMP = 0 , VOLT = 0 ;
 void setup(){
   
     Serial.begin(9600);
-    canSetup(cs,in,clockFreq,canFreq);
+    canSetup(cs,in,canFreq,clockFreq);
 
 
 

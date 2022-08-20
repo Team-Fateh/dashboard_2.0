@@ -1,5 +1,5 @@
 void hmiTempRed(){
-  if(TEMP>=100.00)
+  if(TEMP>=95.00)
   {
     Serial3.print("main");       //63488 Red colour
     Serial3.print(".");

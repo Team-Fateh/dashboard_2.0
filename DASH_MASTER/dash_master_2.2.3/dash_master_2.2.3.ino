@@ -6,9 +6,9 @@
 #define clockFreq 8E6
 #define canFreq   500E3
 #define gear_pin 21       //gear
-#define LED_PIN     7    //LED
+#define LED_PIN     7     //LED
 #define NUM_LEDS    19
-#define SPEED_PIN   3
+#define SPEED_PIN   3     //speed
 #define wheelRadius  0.26
 
 unsigned long RPM = 0;        //CAN
@@ -17,28 +17,31 @@ int gear;                     //gear
 long dur;
 CRGB leds[NUM_LEDS];          //LED
 int light=0;
+int red;
+long unsigned int ledDur=0, ledOldDur=0;         
 float value=0;                //Speed
 float srev=0;
 int srpm;
 int oldtime=0;        
-int time;
+int tim;
 int wheelSpeed;
 
 void setup(){
-  
+    millis();
     Serial.begin(9600);
     Serial3.begin(9600);
     
     canSetup(cs,in,canFreq,clockFreq);        //CAN
     pinMode(gear_pin,INPUT);                  //gear
     FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);//LED
-    pinMode(SPEED_PIN,INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(SPEED_PIN),isr,RISING);
+//    pinMode(SPEED_PIN,INPUT_PULLUP);                      //Speeed
+//    attachInterrupt(digitalPinToInterrupt(SPEED_PIN),isr,RISING);
     
     
 }
     
 void loop(){
+  
   
    
    dur= pulseIn(21,HIGH);     //gear
@@ -48,7 +51,7 @@ void loop(){
     hmiCAN();   
     
    showLightDis();                 //LED
-
+    hmiTempRed();
 
 
 }

@@ -1,5 +1,5 @@
 void showLightCont(){                                 //Continuous Green to Red
-  light=map(sRPM, 0,11000, 0,19);
+  light=map(RPM, 0,11000, 0,19);
   FastLED.clear();
   for (int i=0; i<=light; i++){
   
@@ -19,14 +19,14 @@ void showLightDis(){                                //Discrete Blue to Green to 
   if(ledDur-ledOldDur>=200)
   ledOldDur=ledDur;
   
-  light=map(sRPM, 0,11000, 0,19);
+  light=map(RPM, 0,11000, 0,19);
   FastLED.clear();
-  if(sRPM>=0&&sRPM<=3500){
+  if(RPM>=0&&RPM<=3500){
     for (int i=0; i<=light; i++){
         leds[i]=CRGB(0,0,255);
      }
   }
-  if(sRPM>3500&&sRPM<=7000){
+  if(RPM>3500&&RPM<=7000){
     for (int i=0; i<=6; i++){
         leds[i]=CRGB(0,0,255);
      }
@@ -34,7 +34,7 @@ void showLightDis(){                                //Discrete Blue to Green to 
         leds[i]=CRGB(0,255,0);
      }
   }
-  if(sRPM>7000&&sRPM<=9500){
+  if(RPM>7000&&RPM<=9500){
     for (int i=0; i<=6; i++){
         leds[i]=CRGB(0,0,255);
      }
@@ -45,7 +45,7 @@ void showLightDis(){                                //Discrete Blue to Green to 
         leds[i]=CRGB(255,0,0);
      }
    }
-  if(sRPM>9500){
+  if(RPM>9500){
     for (int i=0; i<=light; i++){
         leds[i]=CRGB(red,0,0);
      }

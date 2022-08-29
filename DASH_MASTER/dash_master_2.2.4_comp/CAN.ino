@@ -120,7 +120,7 @@ void hmiCAN(){
     Serial3.print(".");
     Serial3.print("txt=");
     Serial3.print("\"");
-    Serial3.print(sRPM);          //
+    Serial3.print(RPM);          //
     Serial3.print("\"");
     Serial3.write(0xff);
     Serial3.write(0xff);

@@ -6,16 +6,7 @@ void canSetup(int can_cs, int can_int, long can_freq, long clock_freq) {
   CAN.setClockFrequency(clock_freq);
   if (!CAN.begin(can_freq)) {
     Serial.println("Starting CAN failed!"); //can failed
-    Serial3.print("r1.pco=");       //63488 Red colour
-    Serial3.print("63488");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.print("r1.bco=");       //63488 Red colour
-    Serial3.print("63488");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
+   hmiCANRed();
   }
 }
 
@@ -45,16 +36,7 @@ void getCAN(unsigned long* rpm, float* temp, float* volt){
       CAN.read(); d++;
     }
     *rpm = (rMSB * 256) + rLSB;
-    Serial3.print("r1.pco=");       //34800 green colour
-    Serial3.print("34800");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.print("r1.bco=");       //34800 green colour
-    Serial3.print("34800");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
+    hmiCANGreen();
   }
 
    if(packId==218101064){    //0CFFF548 for battery volt air temp coolant temp
@@ -82,21 +64,21 @@ void getCAN(unsigned long* rpm, float* temp, float* volt){
       }
      *temp=((tMSB*256)+tLSB)*0.1;
      *volt=((vMSB*256)+vLSB)*0.01;
-    Serial3.print("r1.pco=");       //34800 green colour
-    Serial3.print("34800");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.print("r1.bco=");       //34800 green colour
-    Serial3.print("34800");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
+    hmiCANGreen();
     }
 
   }
   else{
-    Serial3.print("r1.pco=");       //63488 Red colour
+   hmiCANRed();
+  }
+}
+
+
+
+
+//CAN HMI
+void hmiCANRed(){
+   Serial3.print("r1.pco=");       //63488 Red colour
     Serial3.print("63488");
     Serial3.write(0xff);
     Serial3.write(0xff);
@@ -106,14 +88,19 @@ void getCAN(unsigned long* rpm, float* temp, float* volt){
     Serial3.write(0xff);
     Serial3.write(0xff);
     Serial3.write(0xff);
-  }
 }
-
-
-
-
-//CAN HMI
-
+void hmiCANGreen(){
+  Serial3.print("r1.pco=");       //34800 green colour
+    Serial3.print("1024");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.print("r1.bco=");       //34800 green colour
+    Serial3.print("1024");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+}
 void hmiCAN(){
     Serial3.print("t");
     Serial3.print("4");
@@ -148,4 +135,54 @@ void hmiCAN(){
     Serial3.write(0xff);
     Serial3.write(0xff);
   
+}
+
+
+void hmiTempRed(){
+  if(TEMP>=95.00)
+  {
+    Serial3.print("main");       //63488 Red colour
+    Serial3.print(".");
+    Serial3.print("bco");
+    Serial3.print("=");
+    Serial3.print("63488");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+
+    for(int i=0;i<=11;i++){
+    Serial3.print("t");       //63488 Red colour
+    Serial3.print(i);
+    Serial3.print(".");
+    Serial3.print("bco");
+    Serial3.print("=");
+    Serial3.print("63488");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+  }
+  if(TEMP<95.00)
+  {
+    Serial3.print("main");       //0 black colour
+    Serial3.print(".");
+    Serial3.print("bco");
+    Serial3.print("=");
+    Serial3.print("0");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+
+    for(int i=0;i<=11;i++){
+    Serial3.print("t");       //0 black colour
+    Serial3.print(i);
+    Serial3.print(".");
+    Serial3.print("bco");
+    Serial3.print("=");
+    Serial3.print("0");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+  }
 }

@@ -1,16 +1,20 @@
-#include<CAN.h>
+#include<CAN.h>                      /*Libraries*/
 #include <FastLED.h>
-
-#define cs 10             //CAN
+                                     /*Defines*/
+                                     /*first_second_third_num*/   
+#define cs 10             //CAN         
 #define in 2
 #define clockFreq 8E6
 #define canFreq   500E3
 #define gear_pin 21       //gear
 #define LED_PIN     7     //LED
 #define NUM_LEDS    19
+#define brake_pin   A8
 //#define SPEED_PIN   3     //speed
 //#define wheelRadius  0.117
 //#define spokeangle  46
+                                     /*Variables*/
+                                     /*firstSecondThirdNum*/
 unsigned long RPM = 0;        //CAN
 float TEMP = 0 , VOLT = 0 ;
 //unsigned long sRPM=0;         //
@@ -18,7 +22,10 @@ int gear;                     //gear
 long dur;
 CRGB leds[NUM_LEDS];          //LED
 int light=0,red;
-long unsigned int ledDur=0, ledOldDur=0;         
+long unsigned int ledDur=0, ledOldDur=0;            
+int brakeValue ;              //Brakes
+float brakePress ;   
+float brakeVolt;
 //float value=0,srev=0;                //Speed
 //int srpm,oldtime=0,tim,wheelSpeed;
 //long unsigned int newStime,Stime,oldStime;
@@ -29,9 +36,7 @@ long unsigned int ledDur=0, ledOldDur=0;
 //float WheelRadius= 0.234 ;
 //float Circum = 16.6;
 //unsigned long duration;
-int brakepin = A8;
-int brakevalue ;
-float a ;
+
 
 void setup(){
   pinMode(53,OUTPUT);
@@ -42,7 +47,7 @@ void setup(){
     canSetup(cs,in,canFreq,clockFreq);        //CAN
     pinMode(gear_pin,INPUT);                  //gear
     FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);  //LED
-    pinMode(brakepin,INPUT);
+    pinMode(brake_pin,INPUT);                  //Brakes
 //    pinMode(SPEED_PIN,INPUT_PULLUP);                      //Speeed
 //    attachInterrupt(digitalPinToInterrupt(SPEED_PIN),speedISR2,RISING);
     
@@ -65,37 +70,10 @@ void loop(){
 //    duration = pulseIn(SPEED_PIN,HIGH);//speed3
 //    getSpeed3();                  //Speed
 //    hmiSpeed3();
-//Brake pressure 
-    brakevalue = analogRead(brakepin);
-    float brakevol = brakevalue* (5.0/1023.0);
-    if (brakevol >= 4.5){
-      brakevol = 4.5;
-      }
-    a = brakevol*100/4-12.45;
 
-    Serial.print(a);
-    Serial.print(",");
-    Serial.println(brakevol);
+    getBrake();                         //Brake pressure 
+    hmiBrake();
 
-    Serial3.print("t");
-    Serial3.print("6");
-    Serial3.print(".");
-    Serial3.print("txt=");
-    Serial3.print("\"");
-    Serial3.print((int)a);
-    Serial3.print("\"");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
+   
 
-    Serial3.print("t");
-    Serial3.print("7");
-    Serial3.print(".");
-    Serial3.print("txt=");
-    Serial3.print("\"");
-    Serial3.print("brake");
-    Serial3.print("\"");
-    Serial3.write(0xff);
-    Serial3.write(0xff);
-    Serial3.write(0xff);
 }

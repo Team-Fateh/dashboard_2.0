@@ -13,21 +13,18 @@ void hmiBrake(){
     Serial3.print("1");
     Serial3.print(".");
     Serial3.print("val=");
-    Serial3.print("\"");
-    Serial3.print(brakePress);
-    Serial3.print("\"");
+    Serial3.print((int)brakePress);
     Serial3.write(0xff);
     Serial3.write(0xff);
     Serial3.write(0xff);
+    Serial.println(brakePress);
 
     if(brakePress>=60){
     Serial3.print("j");
     Serial3.print("1");
     Serial3.print(".");
     Serial3.print("pco=");
-    Serial3.print("\"");
-    Serial3.print("63488");   //Red
-    Serial3.print("\"");
+    Serial3.print(63488);   //Red
     Serial3.write(0xff);
     Serial3.write(0xff);
     Serial3.write(0xff);
@@ -37,9 +34,7 @@ void hmiBrake(){
     Serial3.print("1");
     Serial3.print(".");
     Serial3.print("pco=");
-    Serial3.print("\"");
-    Serial3.print("1024");    //Green
-    Serial3.print("\"");
+    Serial3.print(1024);    //Green
     Serial3.write(0xff);
     Serial3.write(0xff);
     Serial3.write(0xff);

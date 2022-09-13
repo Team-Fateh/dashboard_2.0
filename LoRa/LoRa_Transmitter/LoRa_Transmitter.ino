@@ -31,23 +31,22 @@ void setup() {
 
   Serial.println("Hi, I'm going to send message!");
 
-  Serial1.begin(9600);
-  Serial1.println("Hello, World?");
+  Serial2.begin(9600);
+  Serial2.println("Hello, World?");
 
-  //mySerial.begin(9600);
-  //mySerial.println("Hello, world?");
+ 
 }
 
 void loop() {
-  if (Serial1.available()) {
-    Serial.write(Serial1.read());
+  if (Serial2.available()) {
+    Serial.write(Serial2.read());
   }
   if (Serial.available()) {
-    Serial1.write(Serial.read());
+    Serial2.write(Serial.read());
   }
 
-       Serial1.print(count);
-       Serial1.write  ("  ");
+       Serial2.print(count);
+       Serial2.write("  ");
        Serial.print(count);
        Serial.println();
        delay(200);

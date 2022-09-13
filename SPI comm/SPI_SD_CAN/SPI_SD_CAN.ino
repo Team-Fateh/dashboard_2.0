@@ -17,7 +17,7 @@ void can(){
 }
 void sd(){
   digitalWrite(sd_cs,LOW);
-  digitalWrite(can_cs,LOW);
+  digitalWrite(can_cs,HIGH);
 }
 
 void setup() {
@@ -32,7 +32,6 @@ void setup() {
   // start the CAN bus at 500 kbps
   if (!CAN.begin(500E3)) {
     Serial.println("Starting CAN failed!");
-    while (1);
   }
   
   sd();
@@ -47,6 +46,7 @@ void setup() {
 }
 
 void loop() {
+//  can();
   // try to parse packet
   int packetSize = CAN.parsePacket();
 

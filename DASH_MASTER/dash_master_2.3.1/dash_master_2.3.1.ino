@@ -21,7 +21,7 @@ void setup(){
   
     Serial.begin(9600);
     Serial3.begin(9600);
-    
+    Serial2.begin(9600);                          //Lora
     canSetup(cs,in,canFreq,clockFreq);        //CAN
     pinMode(gear_pin,INPUT);                  //gear
     FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);//LED
@@ -30,7 +30,8 @@ void setup(){
     
 void loop(){
   
-   
+   Serial2.println("Team Fateh");
+   Serial2.println(RPM);
    dur= pulseIn(21,HIGH);     //gear
     hmiGear();
    

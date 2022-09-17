@@ -21,32 +21,38 @@
 #include "Arduino.h"
 
 #include <SoftwareSerial.h>
-int count=0;
-
+char comm;
 SoftwareSerial mySerial(2, 3); // RX, TX
 
 void setup() {
   Serial.begin(9600);
-  delay(500);
-
-  Serial.println("Hi, I'm going to send message!");
-
   mySerial.begin(9600);
-  mySerial.println("Hello, world?");
 }
 
 void loop() {
   if (mySerial.available()) {
     Serial.write(mySerial.read());
   }
-  if (Serial.available()) {
-    mySerial.write(Serial.read());
+  if (Serial.available()>0) {
+//    comm = Serial.read();
+//    mySerial.write(comm);
+      mySerial.write(Serial.read());
   }
-/*
-       mySerial.print(count);
-       mySerial.write("  ");
-       Serial.print(count);
-       Serial.println();
-       delay(200);
-       count++; */
+//  if(comm == 'd'){
+//    mySerial.write(comm);
+//  }
+//  if(comm == 'k'){
+//    delay(100);
+//    mySerial.write(comm);
+//    delay(100);
+//    comm='d';
+//    delay(100);
+//  }
+//  if(comm == 'c'){
+//    delay(100);
+//    mySerial.write(comm);
+//    delay(100);
+//    comm='d';
+//    delay(100);
+//  }
 }

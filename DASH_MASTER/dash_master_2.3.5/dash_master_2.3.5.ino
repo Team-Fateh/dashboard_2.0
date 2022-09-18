@@ -74,7 +74,7 @@ void loop(){
     hmiCAN();   
     
    showLightDis();               //  //LED
-getSpeed2();
+//getSpeed2();
 hmiSpeed();
 Serial.print(wheelSpeed);
 

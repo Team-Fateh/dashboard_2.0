@@ -22,17 +22,18 @@
 void speedISR2(){
   newStime=millis();
   Stime=newStime-oldStime;
-  wheelSpeed=0.076
+  wheelSpeed=0.076/(Stime/1000);
+  wheelSpeed=wheelSpeed*3.6;
   oldStime=newStime;
 }
 
-void getSpeed2(){
-  detachInterrupt(digitalPinToInterrupt(SPEED_PIN));
-  srpm=spokeangle/Stime*1000*60;
-//  wheelSpeed=srpm*wheelRadius*(60/1000);
-wheelSpeed=0.00046*(srpm/6);
-  attachInterrupt(digitalPinToInterrupt(SPEED_PIN),speedISR2,FALLING);
-}
+//void getSpeed2(){
+//  detachInterrupt(digitalPinToInterrupt(SPEED_PIN));
+//  srpm=spokeangle/Stime*1000*60;
+////  wheelSpeed=srpm*wheelRadius*(60/1000);
+//wheelSpeed=0.00046*(srpm/6);
+//  attachInterrupt(digitalPinToInterrupt(SPEED_PIN),speedISR2,FALLING);
+//}
 
 void hmiSpeed(){
     Serial3.print("t6.txt=");

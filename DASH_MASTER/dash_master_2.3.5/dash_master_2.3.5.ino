@@ -43,7 +43,7 @@ void setup(){
     pinMode(gear_pin,INPUT);                  //gear
     FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);//LED
 
-//    attachInterrupt(digitalPinToInterrupt(SPEED_PIN),speedISR2,LOW);
+    attachInterrupt(digitalPinToInterrupt(SPEED_PIN),speedISR2,RISING);
 }
     
 void loop(){

@@ -38,6 +38,7 @@ void loop() {
 //    mySerial.write(comm);
       mySerial.write(Serial.read());
   }
+}
 //  if(comm == 'd'){
 //    mySerial.write(comm);
 //  }
@@ -55,4 +56,4 @@ void loop() {
 //    comm='d';
 //    delay(100);
 //  }
-}
+//}

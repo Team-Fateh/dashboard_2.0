@@ -1,5 +1,6 @@
 void hmiGear(){
-    if(dur>=700&&dur<=900)
+  Serial.println(dur);
+    if(dur>=700&&dur<=840)
     {
     Serial3.print("t");
     Serial3.print("1");
@@ -13,7 +14,7 @@ void hmiGear(){
     Serial3.write(0xff);
     }
 
-    if(dur>=920&&dur<=1200)
+    if(dur>=850&&dur<=1100)
     {
     Serial3.print("t");
     Serial3.print("1");
@@ -25,9 +26,10 @@ void hmiGear(){
     Serial3.write(0xff);
     Serial3.write(0xff);
     Serial3.write(0xff);
+    
     }
 
-    if(dur>=1220&&dur<=1500)
+    if(dur>=1110&&dur<=1500)
     {
     Serial3.print("t");
     Serial3.print("1");

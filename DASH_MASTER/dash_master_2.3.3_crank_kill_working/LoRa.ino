@@ -3,7 +3,10 @@ void loraInit(){
 }
 
 void loraDataSend(){
-  Serial2.println("Team Fateh");
+  Serial2.print("Team Fateh ");
+  Serial2.println(acount);
+  acount++;
+  
 }
 
 //void lora

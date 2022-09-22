@@ -21,13 +21,13 @@ CRGB leds[NUM_LEDS];          //LED
 int light=0;
 int ledDur,ledOldDur,red;//
  char comm;
- 
+ long acount;
 void setup(){
   
     Serial.begin(9600);
     Serial3.begin(9600);
-    Serial2.begin(9600);          //Lora
-
+    Serial2.begin(115200);          //Lora
+    
     engineSetup();
     canSetup(cs,in,canFreq,clockFreq);        //CAN
     pinMode(gear_pin,INPUT);                  //gear
@@ -35,19 +35,20 @@ void setup(){
 }
     
 void loop(){
-
-   if(Serial2.available()){
-   comm = Serial2.read();
-    if(comm=='c'){
-      crank();
-    }
-    if(comm=='k'){
-      kill();
-      
-    }
-    
-    comm='a';
-   }
+  loraDataSend();
+//   if(Serial2.available()){
+//   comm = Serial2.read();
+//    if(comm=='c'){
+//      crank();
+//    }
+//    if(comm=='k'){
+//      kill();
+//    }
+//    if(comm=='d'){
+//      loraDataSend();
+//    }
+//    comm='a';
+//   }
 
    
    dur= pulseIn(21,HIGH);     //gear

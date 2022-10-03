@@ -17,6 +17,7 @@ void sdInit(){
  {
    Serial.println("SD card initialization failed");
    hmiSdRed();
+   
  }
 
  

@@ -2,6 +2,7 @@
 
 //CANSetup
 void canSetup(int can_cs, int can_int, long can_freq, long clock_freq) {
+  canSpi();
   CAN.setPins(can_cs, can_int);
   CAN.setClockFrequency(clock_freq);
   if (!CAN.begin(can_freq)) {
@@ -12,6 +13,7 @@ void canSetup(int can_cs, int can_int, long can_freq, long clock_freq) {
 
 //CAN
 void getCAN(unsigned long* rpm, float* temp, float* volt){
+  canSpi();
   
   int rMSB=0,rLSB=0; //rpm bits
   int tMSB=0,tLSB=0;

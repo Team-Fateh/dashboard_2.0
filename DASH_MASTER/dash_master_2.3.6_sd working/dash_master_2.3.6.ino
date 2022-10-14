@@ -67,4 +67,6 @@ void loop(){
 hmiSpeed();
 // Serial.print(wheelSpeed);
 
+Serial.println(dur);
+
 }

@@ -16,7 +16,7 @@ float tempC;
 void setup(void)
 {
   sensors.begin();	// Start up the library
-  Serial.begin(9600);
+  Serial.begin(115200);
   
   // locate devices on the bus
   Serial.print("Locating devices...");
@@ -35,18 +35,23 @@ void loop(void)
   // Display temperature from each sensor
   for (int i = 0;  i < deviceCount;  i++)
   {
-    Serial.print("Sensor ");
-    Serial.print(i+1);
-    Serial.print(" : ");
+    // Serial.print("Sensor ");
+    // Serial.print(i+1);
+    // Serial.print(" : ");
     tempC = sensors.getTempCByIndex(i);
     Serial.print(tempC);
+    
     // Serial.print((char)176);//shows degrees character
-    Serial.print("C  |  ");
-    Serial.print(DallasTemperature::toFahrenheit(tempC));
+    Serial.print("C");
+    if (i == 0) {
+    Serial.print(",");
+    }
+    // Serial.print("C  |  ");
+    // Serial.print(DallasTemperature::toFahrenheit(tempC));
     // Serial.print((char)176);//shows degrees character
-    Serial.println("F");
+    // Serial.println("F");
   }
   
   Serial.println("");
-  delay(120);
+  // delay(100);
 }

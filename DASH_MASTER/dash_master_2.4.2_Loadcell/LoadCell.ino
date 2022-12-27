@@ -1,16 +1,7 @@
 // -41531 tare zero factor
 //13900 cal factor
-#include "HX711.h"
 
-#define LOADCELL_DOUT_PIN  3
-#define LOADCELL_SCK_PIN  2
-
-HX711 scale;
-
-float calibration_factor = -13400; //-7050 worked for my 440lb max scale setup
-
-void setup() {
-  Serial.begin(115200);
+void loadcellInit() {
   Serial.println("HX711 calibration sketch");
   Serial.println("Remove all weight from scale");
   Serial.println("After readings begin, place known weight on scale");
@@ -26,22 +17,13 @@ void setup() {
   Serial.println(zero_factor);
 }
 
-void loop() {
-
+void loadcellCheck() {
   scale.set_scale(calibration_factor); //Adjust to this calibration factor
-  Serial.print("Reading: ");
-  Serial.print(scale.get_units(), 1);
-  Serial.print(" kg"); //Change this to kg and re-adjust the calibration factor if you follow SI units like a sane person
-  Serial.print(" calibration_factor: ");
-  Serial.print(calibration_factor);
-  Serial.println();
+  load_cell_val = scale.get_units();
+  // Serial.print(" kg"); //Change this to kg and re-adjust the calibration factor if you follow SI units like a sane person
+  // Serial.print(" calibration_factor: ");
+  // Serial.print(calibration_factor);
+  // Serial.println();
 
-  if(Serial.available())
-  {
-    char temp = Serial.read();
-    if(temp == '+' || temp == 'a')
-      calibration_factor += 10;
-    else if(temp == '-' || temp == 'z')
-      calibration_factor -= 10;
-  }
+
 }

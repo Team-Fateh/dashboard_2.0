@@ -26,6 +26,7 @@ unsigned long can_check_time = 2000, last_can_check_time = 0;
 int can_available = 0;// toggled in can green and can red
 int gear;                     //gear
 long dur;
+int G1 = 0, Gn = 21, G2 = 0, G3 = 0, G4 = 0, G5 = 0, G6 = 0;
 CRGB leds[NUM_LEDS];          //LED
 int light=0;
 int ledDur,ledOldDur,red;//
@@ -56,7 +57,8 @@ void loop(){
    xbeeDataSend();
    
    dur= pulseIn(21,HIGH);     //gear
-    hmiGear();
+    hmiGear2018();
+    // hmiGear2016();
    
    sdData();
    getCAN(&RPM,&TEMP,&VOLT);    //CAN

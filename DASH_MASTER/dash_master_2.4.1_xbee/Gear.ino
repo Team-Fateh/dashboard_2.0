@@ -1,4 +1,4 @@
-void hmiGear(){
+void hmiGear2018(){
     if(dur>=750&&dur<=870)
     {
     Serial3.print("t");
@@ -85,6 +85,106 @@ void hmiGear(){
     }
     
     if(dur>=3020&&dur<=3500)
+    {
+    Serial3.print("t");
+    Serial3.print("1");
+    Serial3.print(".");
+    Serial3.print("txt=");
+    Serial3.print("\"");
+    Serial3.print("6");
+    Serial3.print("\"");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+}
+void hmiGear2016(){
+    if(digitalRead(G1)==LOW)
+    {
+    Serial3.print("t");
+    Serial3.print("1");
+    Serial3.print(".");
+    Serial3.print("txt=");
+    Serial3.print("\"");
+    Serial3.print("1");
+    Serial3.print("\"");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+
+    if(digitalRead(Gn)==LOW)
+    {
+    Serial3.print("t");
+    Serial3.print("1");
+    Serial3.print(".");
+    Serial3.print("txt=");
+    Serial3.print("\"");
+    Serial3.print("N");
+    Serial3.print("\"");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+
+    if(digitalRead(G2)==LOW)
+    {
+    Serial3.print("t");
+    Serial3.print("1");
+    Serial3.print(".");
+    Serial3.print("txt=");
+    Serial3.print("\"");
+    Serial3.print("2");
+    Serial3.print("\"");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+
+    if(digitalRead(G3)==LOW)
+    {
+    Serial3.print("t");
+    Serial3.print("1");
+    Serial3.print(".");
+    Serial3.print("txt=");
+    Serial3.print("\"");
+    Serial3.print("3");
+    Serial3.print("\"");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+
+
+    if(digitalRead(G4)==LOW)
+    {
+    Serial3.print("t");
+    Serial3.print("1");
+    Serial3.print(".");
+    Serial3.print("txt=");
+    Serial3.print("\"");
+    Serial3.print("4");
+    Serial3.print("\"");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+
+    if(digitalRead(G5)==LOW)
+    {
+    Serial3.print("t");
+    Serial3.print("1");
+    Serial3.print(".");
+    Serial3.print("txt=");
+    Serial3.print("\"");
+    Serial3.print("5");
+    Serial3.print("\"");
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    Serial3.write(0xff);
+    }
+    
+    if(digitalRead(G6)==LOW)
     {
     Serial3.print("t");
     Serial3.print("1");

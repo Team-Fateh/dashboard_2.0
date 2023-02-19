@@ -5,15 +5,13 @@ int tMSB=0,tLSB=0;
 unsigned long RPM;
 float temp;
 void setup() {
-  CAN.setPins(10,2);
-  CAN.setClockFrequency(8E6);
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial);
 
   Serial.println("CAN Receiver");
 
   // start the CAN bus at 500 kbps
-  if (!CAN.begin(500E3)) {
+  if (!CAN.begin(1000E3)) {
     Serial.println("Starting CAN failed!");
     while (1);
   }
@@ -27,8 +25,8 @@ void loop() {
     // received a packet
     Serial.print("Received ");
     Serial.print("packet with id ");
+    Serial.println(CAN.packetId());
     long packId = CAN.packetId();
-    Serial.println(packId);
     //RPM
     if(packId==218099784){      //0CFFF048 for RPM,TPS,FUEL,Ignition
     
@@ -51,9 +49,9 @@ void loop() {
       RPM=((MSB*255)+LSB)*0.125;
       Serial.println(RPM);
       Serial.println();
-      Serial.print(MSB);
-      Serial.print("    ");
-      Serial.print(LSB);
+      // Serial.print(MSB);
+      // Serial.print("    ");
+      // Serial.print(LSB);
     
     }//if packId
     //RPM

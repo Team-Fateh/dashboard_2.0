@@ -5,7 +5,7 @@ void setup() {
   while (!Serial);
 
   Serial.println("CAN Receiver");
-  // start the CAN bus at 500 kbps
+
 
   if (!CAN.begin(500E3)) {
     Serial.println("Starting CAN failed!");

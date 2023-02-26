@@ -404,11 +404,7 @@ protected:
     ///@param nLeds the number of leds being written out
     ///@param scale the rgb scaling to apply to each led before writing it out
     virtual void show(const struct CRGB *data, int nLeds, CRGB scale) {
-        PixelController<RGB_ORDER, LANES, MASK> pixels(data, nLeds < 0 ? -nLeds : nLeds, scale, getDither());
-        if(nLeds < 0) {
-            // nLeds < 0 implies that we want to show them in reverse
-            pixels.mAdvance = -pixels.mAdvance;
-        }
+        PixelController<RGB_ORDER, LANES, MASK> pixels(data, nLeds, scale, getDither());
         showPixels(pixels);
     }
 

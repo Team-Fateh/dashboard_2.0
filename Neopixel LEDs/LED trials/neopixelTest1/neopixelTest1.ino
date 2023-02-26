@@ -1,18 +1,18 @@
 #include <FastLED.h>
 
-int LED_pin = 31;
-int LED_num = 19;
+int LED_PIN = 5;
+int LED_NUM = 19;
 
 CRGB leds[19];
 
-void setup{
-    FastLED.addLeds<WS2812, LED_PIN, RGB>(leds, NUM_LEDS);
+void setup(){
+    FastLED.addLeds<WS2812, LED_PIN, RGB>(leds, LED_NUM);
     FastLED.setMaxPowerInVoltsAndMilliamps(5,500);
     FastLED.clear();
     FastLED.show();
 }
 
-void loop{
+void loop(){
   leds[0] = CRGB(255,0,0);
   leds[0] = CRGB(0,255,0);
   leds[0] = CRGB(0,0,255);

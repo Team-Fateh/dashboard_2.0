@@ -23,9 +23,9 @@ void loop() {
 
   if (packetSize) {
     // received a packet
-    Serial.print("Received ");
-    Serial.print("packet with id ");
-    Serial.println(CAN.packetId());
+    // Serial.print("Received ");
+    // Serial.print("packet with id ");
+    // Serial.println(CAN.packetId());
     long packId = CAN.packetId();
     //RPM
     if(packId==218099784){      //0CFFF048 for RPM,TPS,FUEL,Ignition
@@ -46,7 +46,7 @@ void loop() {
         }
           CAN.read(); d++;
       }
-      RPM=((MSB*255)+LSB)*0.125;
+      RPM=((MSB*256)+LSB);
       Serial.println(RPM);
       Serial.println();
       // Serial.print(MSB);
@@ -74,7 +74,7 @@ void loop() {
           CAN.read(); e++;
       }
 
-      temp=((tMSB*255)+tLSB)*0.1;
+      temp=((tMSB*256)+tLSB)*0.1;
       Serial.print(temp);
       Serial.println();
       Serial.print(tMSB);

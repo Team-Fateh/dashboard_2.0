@@ -16,6 +16,9 @@
 
 #if defined(__AVR__)
 #define sin16 sin16_avr
+#else
+#define sin16 sin16_C
+#endif
 
 /// Fast 16-bit approximation of sin(x). This approximation never varies more than
 /// 0.69% from the floating point value you'd get by doing
@@ -75,9 +78,6 @@ LIB8STATIC int16_t sin16_avr( uint16_t theta )
     return y;
 }
 
-#else 
-#define sin16 sin16_C
-
 /// Fast 16-bit approximation of sin(x). This approximation never varies more than
 /// 0.69% from the floating point value you'd get by doing
 ///
@@ -109,7 +109,6 @@ LIB8STATIC int16_t sin16_C( uint16_t theta )
     return y;
 }
 
-#endif
 
 /// Fast 16-bit approximation of cos(x). This approximation never varies more than
 /// 0.69% from the floating point value you'd get by doing
@@ -140,11 +139,15 @@ LIB8STATIC int16_t cos16( uint16_t theta)
 //
 //        On Arduino/AVR, this approximation is more than
 //        20X faster than floating point sin(x) and cos(x)
-//
-const uint8_t b_m16_interleave[] = { 0, 49, 49, 41, 90, 27, 117, 10 };
 
 #if defined(__AVR__) && !defined(LIB8_ATTINY)
 #define sin8 sin8_avr
+#else
+#define sin8 sin8_C
+#endif
+
+
+const uint8_t b_m16_interleave[] = { 0, 49, 49, 41, 90, 27, 117, 10 };
 
 /// Fast 8-bit approximation of sin(x). This approximation never varies more than
 /// 2% from the floating point value you'd get by doing
@@ -203,8 +206,6 @@ LIB8STATIC uint8_t  sin8_avr( uint8_t theta)
     return y;
 }
 
-#else
-#define sin8 sin8_C
 
 /// Fast 8-bit approximation of sin(x). This approximation never varies more than
 /// 2% from the floating point value you'd get by doing
@@ -241,8 +242,6 @@ LIB8STATIC uint8_t sin8_C( uint8_t theta)
 
     return y;
 }
-
-#endif
 
 /// Fast 8-bit approximation of cos(x). This approximation never varies more than
 /// 2% from the floating point value you'd get by doing

@@ -11,7 +11,7 @@ void setup() {
   Serial.println("CAN Receiver");
 
   // start the CAN bus at 500 kbps
-  if (!CAN.begin(1000E3)) {
+  if (!CAN.begin(500E3)) {
     Serial.println("Starting CAN failed!");
     while (1);
   }
@@ -48,7 +48,6 @@ void loop() {
       }
       RPM=((MSB*256)+LSB);
       Serial.println(RPM);
-      Serial.println();
       // Serial.print(MSB);
       // Serial.print("    ");
       // Serial.print(LSB);
@@ -84,5 +83,5 @@ void loop() {
     }//if packId Coolant temp
     Serial.println();
   }//if packSize
-  
+  // Serial.println("hello world");
 }

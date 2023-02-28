@@ -6,15 +6,13 @@
 int MSB=0,LSB=0;
 unsigned long RPM;
 void setup() {
-  CAN.setPins(10,2);
-  CAN.setClockFrequency(8E6);
   Serial.begin(9600);
   while (!Serial);
 
   Serial.println("CAN Receiver");
 
   // start the CAN bus at 500 kbps
-  if (!CAN.begin(500E3)) {
+  if (!CAN.begin(1000E3)) {
     Serial.println("Starting CAN failed!");
     while (1);
   }

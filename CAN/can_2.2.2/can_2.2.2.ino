@@ -2,8 +2,10 @@
 
 int MSB=0,LSB=0;
 int tMSB=0,tLSB=0;
+int vMSB=0,vLSB=0;
 unsigned long RPM;
 float temp;
+float volts;
 void setup() {
   Serial.begin(115200);
   while (!Serial);
@@ -11,21 +13,17 @@ void setup() {
   Serial.println("CAN Receiver");
 
   // start the CAN bus at 500 kbps
-  if (!CAN.begin(500E3)) {
+  if (!CAN.begin(1000E3)) {
     Serial.println("Starting CAN failed!");
     while (1);
   }
 }
 
 void loop() {
-  // try to parse packet
-  int packetSize = CAN.parsePacket();
 
+//
+  int packetSize = CAN.parsePacket();
   if (packetSize) {
-    // received a packet
-    // Serial.print("Received ");
-    // Serial.print("packet with id ");
-    // Serial.println(CAN.packetId());
     long packId = CAN.packetId();
     //RPM
     if(packId==218099784){      //0CFFF048 for RPM,TPS,FUEL,Ignition
@@ -47,21 +45,21 @@ void loop() {
           CAN.read(); d++;
       }
       RPM=((MSB*256)+LSB);
-      Serial.println(RPM);
-      // Serial.print(MSB);
-      // Serial.print("    ");
-      // Serial.print(LSB);
-    
-    }//if packId
-    //RPM
-    //Coolant Temp
+    }
     if(packId==218101064){    //0CFFF548 for battery volt air temp coolant temp
     
       // only print packet data for non-RTR packets
       int e=0;
       while (CAN.available()) {
         
-        
+        if (e==0){                            //0th and 1st Byte are voltage data
+                e++;
+                vLSB=(int)CAN.read();
+            }
+        if (e==1){
+                e++;
+                vMSB=(int)CAN.read();
+            }
         if (e==4){
           e++;
           tLSB=(int)CAN.read();
@@ -74,14 +72,45 @@ void loop() {
       }
 
       temp=((tMSB*256)+tLSB)*0.1;
-      Serial.print(temp);
-      Serial.println();
-      Serial.print(tMSB);
-      Serial.print("    ");
-      Serial.print(tLSB);
+      volts=((vMSB*256)+vLSB)*0.01;
+      Serial.println(temp);
+      Serial.println(volts);
+    }
+  }
+//
+ Serial2.print("t");
+    Serial2.print(placeholder);
+    Serial2.print(".");
+    Serial2.print("txt=");
+    Serial2.print("\"");
+    Serial2.print(value);
+    Serial2.print("\"");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+ Serial2.print("t");
+    Serial2.print(placeholder);
+    Serial2.print(".");
+    Serial2.print("txt=");
+    Serial2.print("\"");
+    Serial2.print(value);
+    Serial2.print("\"");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
     
-    }//if packId Coolant temp
-    Serial.println();
-  }//if packSize
-  // Serial.println("hello world");
+ Serial2.print("t");
+    Serial2.print(placeholder);
+    Serial2.print(".");
+    Serial2.print("txt=");
+    Serial2.print("\"");
+    Serial2.print(value);
+    Serial2.print("\"");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+
+  
 }

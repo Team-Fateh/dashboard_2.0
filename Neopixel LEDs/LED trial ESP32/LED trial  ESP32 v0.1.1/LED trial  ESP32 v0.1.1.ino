@@ -52,7 +52,7 @@ if((millis()-timeblink)>=250&&(millis()-timeblink)<=500){
  leds[7] = CRGB(255,0,0);
  leds[8] = CRGB(255,0,0);
  leds[9] = CRGB(255,0,0);
- leds[10] = CRGB(0,0,255);
+ leds[10] = CRGB(255,0,0);
  leds[11] = CRGB(0,0,255);
  leds[13] = CRGB(0,0,255);
  leds[14] = CRGB(0,0,255);

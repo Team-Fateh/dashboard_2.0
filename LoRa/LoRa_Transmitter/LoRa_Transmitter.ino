@@ -26,12 +26,11 @@ int count=0;
 //SoftwareSerial mySerial(2, 3); // RX, TX
 
 void setup() {
-  Serial.begin(9600);
-  delay(500);
+  Serial.begin(230400);
 
   Serial.println("Hi, I'm going to send message!");
 
-  Serial2.begin(9600);
+  Serial2.begin(230400);
   Serial2.println("Hello, World?");
 
  
@@ -45,10 +44,10 @@ void loop() {
     Serial2.write(Serial.read());
   }
 
-       Serial2.print(count);
-       Serial2.write("  ");
-       Serial.print(count);
-       Serial.println();
-       delay(200);
-       count++; 
+      //  Serial2.print(count);
+      //  Serial2.write("  ");
+      //  Serial.print(count);
+      //  Serial.println();
+      //  delay(200);
+      //  count++; 
 }
